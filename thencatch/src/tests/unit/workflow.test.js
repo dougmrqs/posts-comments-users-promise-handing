@@ -1,4 +1,4 @@
-const work = require('../../app/controllers/WorkflowController');
+const work = require('../../app/useCases/workflow');
 
 describe('Workflow test', () => {
     it('should return 115 posts with comments and users', done => {

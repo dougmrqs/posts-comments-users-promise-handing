@@ -1,4 +1,4 @@
-const Fetcher = require('../../app/utils/fetcher');
+const Fetcher = require('../../app/services/fetcher');
 
 describe('Fetcher test', () => {
     describe('Posts fetcher', () => {

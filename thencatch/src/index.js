@@ -1,4 +1,4 @@
-const work = require('./app/controllers/WorkflowController');
+const work = require('./app/useCases/workflow');
 
 function main() {
     work()
