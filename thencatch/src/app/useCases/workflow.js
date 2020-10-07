@@ -1,17 +1,19 @@
-const FetchController = require('./FetchController');
-const Fetcher = require('../utils/fetcher');
+const FetchMany = require('../services/fetchMany');
+const Fetcher = require('../services/fetcher');
+const IdGetter = require('../services/idGetter');
+const Appender = require('../services/Appender');
 
 const fetcher = new Fetcher();
-const fetchController = new FetchController();
+const fetchMany = new FetchMany();
 
 function fetchAndAppend(posts, totalPosts, page, limit) {
     return fetcher.fetchPosts(page, limit)
         .then(fetchedPosts => {
-            const postIdList = fetchController.getPostIdSet(fetchedPosts);
+            const postIdList = IdGetter.getPostIdSet(fetchedPosts);
 
-            return fetchController.loadComments(postIdList)
+            return fetchMany.loadComments(postIdList)
                 .then(comments => {
-                    return fetchController.appendCommentsToPosts(fetchedPosts, comments);
+                    return Appender.appendCommentsToPosts(fetchedPosts, comments);
                 })
                 .catch(error => console.log(error));
         })
@@ -39,10 +41,10 @@ function work(totalPosts) {
 
     return fetchAndAppend(initialPosts, totalPosts, initialPage, initialLimit)
         .then(postList => {
-            const userIds = fetchController.getUserIdSet(postList);
-            return fetchController.loadUsers(userIds)
+            const userIds = IdGetter.getUserIdSet(postList);
+            return fetchMany.loadUsers(userIds)
                 .then(users => {
-                    return fetchController.appendUsersToPosts(postList, users);
+                    return Appender.appendUsersToPosts(postList, users);
                 })
                 .catch(error => console.log(error));
         })
