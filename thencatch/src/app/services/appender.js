@@ -1,6 +1,6 @@
-class Appender {
+const Appender = {
 
-    static appendCommentsToPosts(posts, comments) {
+    appendCommentsToPosts(posts, comments) {
         var i = 0;
 
         posts.forEach(post => {
@@ -10,9 +10,9 @@ class Appender {
         });
 
         return posts;
-    };
+    },
 
-    static appendUsersToPosts(postsList, usersList) {
+    appendUsersToPosts(postsList, usersList) {
         postsList.forEach(post => {
             const postId = post.userId;
             usersList.forEach(user => {
@@ -22,7 +22,7 @@ class Appender {
             });
         });
         return postsList;
-    };
+    }
 };
 
 module.exports = Appender;
