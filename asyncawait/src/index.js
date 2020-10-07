@@ -1,11 +1,11 @@
-const FetchController = require('./app/controllers/FetchController');
+const Workflow = require('./app/useCases/workflow');
 
 async function main() {
-    const fetchController = new FetchController();
+    const workflow = new Workflow();
 
-    await fetchController.work(115);
+    await workflow.work(115);
 
-    console.log(fetchController.postList);
+    console.log(workflow.postList);
 };
 
 main();
